@@ -39,8 +39,9 @@ def scraping_habr(pages):
                 article_text = el.find(class_="tm-article-body tm-article-snippet__lead").text
 
             article_text_splited = [el.strip("«()/_-\\*+?!».,") for el in article_text.split()]
+            title_splited = [el.strip("«()/_-\\*+?!».,") for el in title.split()]
 
-            found_word = list(set(article_text_splited) & set(KEYWORDS))
+            found_word = list(set(article_text_splited) & set(KEYWORDS) | set(title_splited) & set(KEYWORDS))
 
             if found_word:
                 print("\nНайдено ключевое слово: ", "".join(found_word))
